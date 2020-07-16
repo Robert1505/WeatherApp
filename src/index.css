@@ -15,9 +15,19 @@ code {
   src: local('Playfair Display'), url(./fonts/PlayfairDisplay-VariableFont_wght.ttf) format('truetype');
 }
 
+@font-face{
+  font-family: 'Rowdies', cursive;
+  src: local('Rowdies'), url(./fonts/Rowdies-Bold.ttf) format('truetype');
+}
+
+@font-face{
+  font-family: 'PT Serif', serif;
+  src: local('PT Serif'), url(./fonts/PTSans-Bold.ttf) format('truetype');
+}
+
 .background{
-  background-image: url(./background.jpg);
+  background-image: url(./background1.jpg);
   height: 100vh;
   background-size: cover;
-  padding-top: 5%;
+  padding-top: 10%;
 }

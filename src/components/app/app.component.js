@@ -22,23 +22,27 @@ class App extends React.Component{
                 <div className = "timezone">
                     <TextLine  text = 'Monday 1:20am'/>
                 </div>  
-                <div>
-                     <WeatherDetails detail = "clear" icon = "fa fa-moon-o"/>   
+                <div className = "detail">
+                     <WeatherDetails detail = " Clear" icon = "fa fa-moon-o"/>   
                 </div>
-                <div className = 'medtemp'>
-                     <Grades temp = '23°C'/>
+                <div className = "container">
+                    <div className = 'medtemp'>
+                        <Grades temp = '23°C'/>
+                    </div>
+                    <div className = "container2">
+                        <div className = 'gradesDegree'>
+                            <Grades temp = '21°C'/>
+                        </div>
+                        <div className = 'gradesDegree'>
+                            <Grades temp = '25°C'/>
+                        </div>
+                    </div>
                 </div>
-                <div className = 'gradesDegree'>
-                     <Grades temp = '21°C'/>
-                </div>
-                <div className = 'gradesDegree'>
-                     <Grades temp = '25°C'/>
-                </div>
-                <div>
+                <div className = "windSpeed">
                    <TextLine text = 'Wind Speed'/>
                 </div>
-                <div>
-                    <WeatherDetails detail = "21ms" icon = "fa fa-thermometer-full"/>
+                <div className = "detail">
+                    <WeatherDetails detail = " 21 m/s" icon = "fa fa-snowflake-o"/>
                 </div> 
             </div>
         );

@@ -5,7 +5,7 @@ class Grades extends React.Component{
     render(){
         return(
             <div>
-                {this.props.temp}
+                {this.props.temp}°C
             </div>
         );
     }

@@ -6,18 +6,32 @@ import WeatherDetails from '../weather-details/weather-details.component';
 
 
 class App extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            dataIsLoaded : false,
+            loadedData : null
+        };
+    }
     getData = () => {
-        fetch('api.openweathermap.org/data/2.5/weather?q=Paris&appid=fb17237a9576d0bf07e422e276842f84')
-        .then(response => response.json())
-        .then(data => console.log(data));
-
-
+        fetch('http://api.openweathermap.org/data/2.5/weather?q=Paris&appid=fb17237a9576d0bf07e422e276842f84&units=metric')
+        .then((response) => response.json())
+        .then((data) => this.setState({dataIsLoaded : true, loadedData : data}));
+    }
+    componentDidMount = () => {
+        this.getData();
     }
     render(){
+        let temp = 0;
+        let city = "";
+        if(this.state.dataIsLoaded){
+           temp = this.state.loadedData.main.temp;
+           city = this.state.loadedData.name;
+        }
         return(
             <div className = "weatherApp"> 
                 <div className = "title">
-                   <TextLine text = "Hong Kong" />
+                   <TextLine text = {city}/>
                 </div>
                 <div className = "timezone">
                     <TextLine  text = 'Monday 1:20am'/>
@@ -27,7 +41,7 @@ class App extends React.Component{
                 </div>
                 <div className = "container">
                     <div className = 'medtemp'>
-                        <Grades temp = '23°C'/>
+                        <Grades temp = {temp}/>
                     </div>
                     <div className = "container2">
                         <div className = 'gradesDegree'>

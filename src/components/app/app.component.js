@@ -24,39 +24,52 @@ class App extends React.Component{
     render(){
         let temp = 0;
         let city = "";
+        let tempmax = 0;
+        let tempmin = 0;
+        let description = "";
+        let windspeed = 0;
+        let unixTimestamp = 0;
         if(this.state.dataIsLoaded){
            temp = this.state.loadedData.main.temp;
            city = this.state.loadedData.name;
+           tempmax = this.state.loadedData.main.temp_max;
+           tempmin = this.state.loadedData.main.temp_min;
+           description = this.state.loadedData.weather.description;
+           windspeed = this.state.loadedData.wind.speed;
+           unixTimestamp = this.state.loadedData.timezone;
         }
+        let milliseconds = unixTimestamp * 1000;
+        let dateObject = new Date(milliseconds);
+        let humanDateFormat = dateObject.toLocaleString();
         return(
             <div className = "weatherApp"> 
                 <div className = "title">
                    <TextLine text = {city}/>
                 </div>
                 <div className = "timezone">
-                    <TextLine  text = 'Monday 1:20am'/>
+                    <TextLine  text2 = {dateObject.toLocaleString("en-US", {weekday: "short"})} space = " " text = {dateObject.toLocaleString("en-US", {hour: "numeric"})}/>
                 </div>  
                 <div className = "detail">
-                     <WeatherDetails detail = " Clear" icon = "fa fa-moon-o"/>   
+                     <WeatherDetails icon = "fa fa-moon-o" detail = {description}/>   
                 </div>
                 <div className = "container">
                     <div className = 'medtemp'>
-                        <Grades temp = {temp}/>
+                        <Grades temp = {Math.round(temp)}/>
                     </div>
                     <div className = "container2">
                         <div className = 'gradesDegree'>
-                            <Grades temp = '21°C'/>
+                            <Grades temp = {Math.round(tempmin)}/>
                         </div>
                         <div className = 'gradesDegree'>
-                            <Grades temp = '25°C'/>
+                            <Grades temp = {Math.round(tempmax)}/>
                         </div>
                     </div>
                 </div>
                 <div className = "windSpeed">
-                   <TextLine text = 'Wind Speed'/>
+                   <TextLine text = "Wind Speed"/>
                 </div>
                 <div className = "detail">
-                    <WeatherDetails detail = " 21 m/s" icon = "fa fa-snowflake-o"/>
+                    <WeatherDetails detail = {windspeed} icon = "fa fa-snowflake-o" space = " " marime = " m/s"/>
                 </div> 
             </div>
         );

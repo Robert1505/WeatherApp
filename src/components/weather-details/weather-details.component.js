@@ -7,7 +7,9 @@ class WeatherDetails extends React.Component{
         return(
             <div>
                 <i className= {this.props.icon} aria-hidden="true"></i>
+                {this.props.space}
                 {this.props.detail}
+                {this.props.marime}
             </div>
         );
     }

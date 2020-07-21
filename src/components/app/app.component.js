@@ -34,13 +34,12 @@ class App extends React.Component{
            city = this.state.loadedData.name;
            tempmax = this.state.loadedData.main.temp_max;
            tempmin = this.state.loadedData.main.temp_min;
-           description = this.state.loadedData.weather.description;
+           description = this.state.loadedData.weather[0].main;
            windspeed = this.state.loadedData.wind.speed;
            unixTimestamp = this.state.loadedData.timezone;
         }
         let milliseconds = unixTimestamp * 1000;
         let dateObject = new Date(milliseconds);
-        let humanDateFormat = dateObject.toLocaleString();
         return(
             <div className = "weatherApp"> 
                 <div className = "title">
@@ -50,7 +49,7 @@ class App extends React.Component{
                     <TextLine  text2 = {dateObject.toLocaleString("en-US", {weekday: "short"})} space = " " text = {dateObject.toLocaleString("en-US", {hour: "numeric"})}/>
                 </div>  
                 <div className = "detail">
-                     <WeatherDetails icon = "fa fa-moon-o" detail = {description}/>   
+                     <WeatherDetails icon = "fa fa-moon-o" space = " " detail = {description}/>   
                 </div>
                 <div className = "container">
                     <div className = 'medtemp'>

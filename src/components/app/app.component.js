@@ -3,6 +3,7 @@ import './app.style.scss';
 import TextLine from '../textLine/textLine.component';
 import Grades from '../grades/grades.component';
 import WeatherDetails from '../weather-details/weather-details.component';
+import Button from '../button/button.component';
 
 
 class App extends React.Component{
@@ -10,18 +11,23 @@ class App extends React.Component{
         super(props);
         this.state = {
             dataIsLoaded : false,
-            loadedData : null
+            loadedData : null,
+            selectedCity : "Sibiu"
         };
     }
     getData = () => {
-        fetch('http://api.openweathermap.org/data/2.5/weather?q=Paris&appid=fb17237a9576d0bf07e422e276842f84&units=metric')
+        fetch('http://api.openweathermap.org/data/2.5/weather?q='+this.state.selectedCity+'&appid=fb17237a9576d0bf07e422e276842f84&units=metric')
         .then((response) => response.json())
         .then((data) => this.setState({dataIsLoaded : true, loadedData : data}));
     }
     componentDidMount = () => {
         this.getData();
     }
-    render(){
+    changeCity = (e) => {
+      //  this.setState({city : "Barcelona"}, () => this.getData());
+        console.log(e.currentTarget.textContent);
+    } 
+        render(){
         let temp = 0;
         let city = "";
         let tempmax = 0;
@@ -36,7 +42,7 @@ class App extends React.Component{
            tempmin = this.state.loadedData.main.temp_min;
            description = this.state.loadedData.weather[0].main;
            windspeed = this.state.loadedData.wind.speed;
-           unixTimestamp = this.state.loadedData.timezone;
+           unixTimestamp = this.state.loadedData.dt;
         }
         let milliseconds = unixTimestamp * 1000;
         let dateObject = new Date(milliseconds);
@@ -46,8 +52,12 @@ class App extends React.Component{
                    <TextLine text = {city}/>
                 </div>
                 <div className = "timezone">
-                    <TextLine  text2 = {dateObject.toLocaleString("en-US", {weekday: "short"})} space = " " text = {dateObject.toLocaleString("en-US", {hour: "numeric"})}/>
+                    <TextLine  text2 = {dateObject.toLocaleString("en-US", {weekday: "long"})} space = " " minutes = {dateObject.toLocaleString("en-US", {minutes: "numeric"})}/>
                 </div>  
+                <div className = "cities">
+                    <Button onButtonClick = {this.changeCity()} city = "Paris"/>
+                    <Button onButtonClick = {this.changeCity()} city = "London"/>
+                </div>
                 <div className = "detail">
                      <WeatherDetails icon = "fa fa-moon-o" space = " " detail = {description}/>   
                 </div>

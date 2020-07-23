@@ -8,6 +8,7 @@ class TextLine extends React.Component{
                 {this.props.text2}
                 {this.props.space}
                 {this.props.text}
+                {this.props.minutes}
             </div>
         );
     }

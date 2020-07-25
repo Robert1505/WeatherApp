@@ -12,7 +12,7 @@ class App extends React.Component{
         this.state = {
             dataIsLoaded : false,
             loadedData : null,
-            selectedCity : "Sibiu"
+            selectedCity : "London"
         };
     }
     getData = () => {
@@ -24,7 +24,7 @@ class App extends React.Component{
         this.getData();
     }
     changeCity = (e) => {
-      //  this.setState({city : "Barcelona"}, () => this.getData());
+        this.setState({city : "Barcelona"}, () => this.getData());
         console.log(e.currentTarget.textContent);
     } 
         render(){
@@ -35,6 +35,7 @@ class App extends React.Component{
         let description = "";
         let windspeed = 0;
         let unixTimestamp = 0;
+        let unixTimezone = 0;
         if(this.state.dataIsLoaded){
            temp = this.state.loadedData.main.temp;
            city = this.state.loadedData.name;
@@ -43,6 +44,7 @@ class App extends React.Component{
            description = this.state.loadedData.weather[0].main;
            windspeed = this.state.loadedData.wind.speed;
            unixTimestamp = this.state.loadedData.dt;
+           unixTimezone = this.state.loadedData.timezone;
         }
         let milliseconds = unixTimestamp * 1000;
         let dateObject = new Date(milliseconds);
@@ -55,8 +57,10 @@ class App extends React.Component{
                     <TextLine  text2 = {dateObject.toLocaleString("en-US", {weekday: "long"})} space = " " minutes = {dateObject.toLocaleString("en-US", {minutes: "numeric"})}/>
                 </div>  
                 <div className = "cities">
-                    <Button onButtonClick = {this.changeCity()} city = "Paris"/>
-                    <Button onButtonClick = {this.changeCity()} city = "London"/>
+                    <div className = "leftbutton">
+                      <Button onButtonClick = {this.changeCity} city = "Paris"/>
+                    </div>
+                    <Button onButtonClick = {this.changeCity} city = "London"/>
                 </div>
                 <div className = "detail">
                      <WeatherDetails icon = "fa fa-moon-o" space = " " detail = {description}/>   

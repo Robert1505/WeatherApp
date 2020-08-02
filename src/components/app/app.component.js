@@ -24,8 +24,7 @@ class App extends React.Component{
         this.getData();
     }
     changeCity = (e) => {
-        this.setState({city : "Barcelona"}, () => this.getData());
-        console.log(e.currentTarget.textContent);
+        this.setState({selectedCity : e.currentTarget.textContent}, () => this.getData());
     } 
         render(){
         let temp = 0;
@@ -46,8 +45,15 @@ class App extends React.Component{
            unixTimestamp = this.state.loadedData.dt;
            unixTimezone = this.state.loadedData.timezone;
         }
+
+        
         let milliseconds = unixTimestamp * 1000;
-        let dateObject = new Date(milliseconds);
+        let utcTime = milliseconds - 10800000;
+        let cityTime = utcTime + unixTimezone * 1000;
+        let dateObject = new Date(cityTime);
+
+
+        console.log(this.state.loadedData);
         return(
             <div className = "weatherApp"> 
                 <div className = "title">

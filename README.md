@@ -1,5 +1,7 @@
 #Weather App with API
 
+![Demo App](https://github.com/Robert1505/WeatherApp/blob/master/React-App.png?raw=true)
+
 [Demo App](http://weather-app-reactjs.epizy.com/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
